@@ -10,11 +10,11 @@ using ProEventos.API.Models;
 namespace ProEventos.API.Controllers
 {
     [ApiController]
-    [Route("api/evento")]
-    public class EventoController : ControllerBase
+    [Route("api/eventos")]
+    public class EventosController : ControllerBase
     {
         private readonly DataContext _context;
-        public EventoController(DataContext context)
+        public EventosController(DataContext context)
         {
             this._context = context;
         }
