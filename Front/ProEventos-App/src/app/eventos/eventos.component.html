@@ -20,6 +20,7 @@
       <th>
         <button type="button" class="btn btn-outline-light btn-sm"
           (click)="alterarImagem()">
+          <i class="{{!exibirImagem ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
           {{!exibirImagem ? 'Exibir' : 'Ocultar'}}
         </button>
       </th>
@@ -42,15 +43,25 @@
           [style.margin.px]="margemImagem"
         >
       </td>
-      <td>{{evento.eventoId}}</td>
+      <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento}}</td>
+      <td>{{evento.dataEvento | DateTimeFormatPipe}}</td>
       <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lote}}</td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
-        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        <!-- <tbody *ngIf="evento.lotes && evento.lotes.length">
+          <tr *ngFor="let lote of evento.lotes">
+            <td>{{lote.nome}} {{lote.quantidade}} {{lote.dataInicio}} </td>
+          </tr>
+        </tbody> -->
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm m-2" tooltip="Editar">
+          <i class="fa fa-edit"></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)">
+          <i class="fa fa-trash"></i>
+        </button>
       </td>
     </tr>
   </tbody>
@@ -64,3 +75,11 @@
 </table>
 
 <!-- {{eventos | json}} -->
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Deletar este evento?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
